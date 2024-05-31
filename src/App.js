@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import TaskInput from './components/TaskInput';
+import TaskList from './components/TaskList';
+import EditTaskModal from './components/EditTaskModal';
 
-function App() {
+const App = () => {
+  const [editingTask, setEditingTask] = useState(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Todo App</h1>
+      <TaskInput />
+      <TaskList onEdit={setEditingTask} />
+      {editingTask && <EditTaskModal task={editingTask} onClose={() => setEditingTask(null)} />}
     </div>
   );
-}
+};
 
 export default App;
